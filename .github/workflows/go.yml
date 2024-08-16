@@ -30,11 +30,11 @@ jobs:
           go-version-file: go.mod
       - name: Set GOVERSION env
         id: set-goversion-env
-        run: echo "::set-env name=GOVERSION::$(go version)"
+        run: echo "GOVERSION=$(go version)" >> $GITHUB_OUTPUT
       - name: Validate .goreleaser.yml with goreleaser-action
         uses: goreleaser/goreleaser-action@v6
         with:
           version: latest
-          args: release --snapshot --skip-publish --clean --debug
+          args: check
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
