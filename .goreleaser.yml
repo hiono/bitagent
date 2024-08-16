@@ -10,8 +10,8 @@ builds:
     binary: bitagent
     goos:
       - linux
-      - windows
-      - darwin
+      # - windows
+      # - darwin
       # - freebsd
     goarch:
       - amd64
