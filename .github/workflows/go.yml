@@ -22,3 +22,22 @@ jobs:
         run: go build -v ./...
       - name: Test
         run: go test -v ./...
+  validate-goreleaser:
+    name: Validate .goreleaser.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - name: Set GOVERSION env
+        id: set-goversion-env
+        run: echo "::set-env name=GOVERSION::$(go version)"
+      - name: Validate .goreleaser.yml with goreleaser-action
+        uses: goreleaser/goreleaser-action@v6
+        with:
+          version: latest
+          args: release --snapshot --skip-publish --clean --debug
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }
