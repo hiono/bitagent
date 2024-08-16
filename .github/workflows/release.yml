@@ -20,7 +20,7 @@ jobs:
         with:
           distribution: goreleaser
           # 'latest', 'nightly', or a semver
-          version: "~> v2"
+          version: 2
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
